@@ -31,6 +31,9 @@ module.exports = app => {
 
     route.post((req, res) => {
 
+        if (!app.utils.validator.users(app, req, res))
+            return false;
+
         db.insert(req.body, (err, user) => {
             if (err) {
                 app.utils.error.send(err, req, res);
